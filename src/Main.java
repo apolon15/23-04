@@ -74,8 +74,8 @@ public class Main {
         System.out.println("***********");
 
         perebor1(toysMap);
-        perebor2(toysMap);
-        perebor3(toysMap);
+        //    perebor2(toysMap);
+        //   perebor3(toysMap);
 
         /*
         2 Добавить студентов в коллекцию. Создать класс Student, содержащий следующие характеристики – имя, группа, курс, оценки по предметам.
@@ -142,8 +142,8 @@ public class Main {
         System.out.println(listStudent);
         System.out.println("*/***********/////*****");
 //        System.out.println(del(listStudent));
-//        System.out.println(upCurse(listStudent));
-        printStudents(listStudent, 2);
+        System.out.println(upCurse(listStudent));
+        //       printStudents(listStudent, 2);
 
 
     }
@@ -166,16 +166,22 @@ public class Main {
 
 
     public static List<Student> upCurse(ArrayList<Student> listStudent) {
-        for (Student s : listStudent) {
-            if (s.getAvg() >= 3) {
-                s.setCours(s.getCours() + 1);
+        listStudent.stream().forEach(x -> {
+            if (x.getAvg() >= 3) {
+                x.setCours(x.getCours() + 1);
             }
-        }
+        });
+//        for (Student s : listStudent) {
+//            if (s.getAvg() >= 3) {
+//                s.setCours(s.getCours() + 1);
+//            }
+//        }
         return listStudent;
     }
 
 
     public static List<Student> del(ArrayList<Student> listStudent) {
+
         Iterator<Student> it = listStudent.iterator();
         while (it.hasNext()) {
             if (it.next().getAvg() < 3) {
@@ -187,7 +193,6 @@ public class Main {
 
 
     public static void perebor3(Map<String, ProductToys> map) {
-        System.out.println("***********");
         System.out.println("\nИмена продуктов(игрушек)");
         for (Map.Entry<String, ProductToys> name : map.entrySet()) {
             System.out.println(name.getKey() + " " + name.getValue());
@@ -195,19 +200,15 @@ public class Main {
     }
 
     public static void perebor2(Map<String, ProductToys> map) {
-        Collection<String> collectionName = new LinkedList<>();
-        collectionName = map.keySet();
         System.out.println("Иммена игрушек через keySet ");
-        for (String name : collectionName) {
+        for (String name : map.keySet()) {
             System.out.println(name);
         }
 
     }
 
     public static void perebor1(Map<String, ProductToys> map) {
-        Collection<ProductToys> listProduct = new LinkedList<>();
-        listProduct = map.values();
         System.out.println("\nТовар,значение(values)");
-        listProduct.stream().forEach(x -> System.out.println(x));
+        map.values().stream().forEach(x -> System.out.println(x));
     }
 }
